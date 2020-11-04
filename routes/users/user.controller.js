@@ -5,6 +5,8 @@ const {
  
   } = require("./user.service");
   const { hashSync, genSaltSync, compareSync } = require("bcrypt");
+	  var passwordHash = require('password-hash');
+
   const { sign } = require("jsonwebtoken");
   const sesClient = require('./aws/aws_ses');
   module.exports = {
@@ -27,8 +29,9 @@ const {
 		}
 		else{
 		var random=(Math.floor(Math.random() * 26) + Date.now()).toString();
-			console.log(random);      
-body.password = hashSync(random, 10);
+			console.log(random);    
+		  body.password=passwordHash.generate(random);
+		//body.password = hashSync(random, 10);
       create(body, (err, results) => {
         if (err) {
           console.log(err);
@@ -70,7 +73,8 @@ body.password = hashSync(random, 10);
         }
 	var password=(body.password).toString()
 	
-        const result = compareSync(password, results.password);
+        const result =passwordHash.verify(password, results.password); 
+//compareSync(password, results.password);
         if (result) {
 
           results.password = undefined;
