@@ -4,7 +4,7 @@ const {
     getUserByUserEmail,
  
   } = require("./user.service");
-  const { hashSync, genSaltSync, compareSync } = require("bcrypt");
+  //const { hashSync, genSaltSync, compareSync } = require("bcrypt");
 	  var passwordHash = require('password-hash');
 
   const { sign } = require("jsonwebtoken");
@@ -14,7 +14,7 @@ const {
       res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
       const body = req.body;
-      const salt = genSaltSync(10);
+    //  const salt = genSaltSync(10);
 	var email=(body.email).toString();
 	getUserByUserEmail(email, (err, results) => {
 	if(err){
