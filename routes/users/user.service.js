@@ -8,13 +8,14 @@ console.log('err')}
 module.exports = {
   create: (data, callBack) => {
     pool.query(
-      `insert into users(username, nickname, email, phonenumber, password) 
+      `insert into users(username, email, phone,age, password) 
                 values(?,?,?,?,?)`,
       [
         data.username,
-        data.nickname,
+   
         data.email,
-        data.phoneNumber,
+        data.phone,
+	      data.age,
         data.password
         
       ],
